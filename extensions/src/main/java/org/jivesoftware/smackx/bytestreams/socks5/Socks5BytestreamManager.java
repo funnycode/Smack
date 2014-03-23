@@ -574,15 +574,12 @@ public final class Socks5BytestreamManager implements BytestreamManager {
             try {
                 proxyInfo = serviceDiscoveryManager.discoverInfo(item.getEntityID());
             }
-            catch (NoResponseException e) {
-                // blacklist errornous server
-                proxyBlacklist.add(item.getEntityID());
-                continue;            }
-            catch (XMPPErrorException e) {
+            catch (NoResponseException|XMPPErrorException e) {
                 // blacklist errornous server
                 proxyBlacklist.add(item.getEntityID());
                 continue;
             }
+
 
             Iterator<Identity> identities = proxyInfo.getIdentities();
 
